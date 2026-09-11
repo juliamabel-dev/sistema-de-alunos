@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Alunos - Sistema de Alunos</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                🎓
+                <span>Sistema<br>de Alunos</span>
+            </div>
+
+            <nav>
+
+                <a href="/" class="menu-item">
+                    🏠
+                    <span>Início</span>
+                </a>
+
+                <a href="/alunos" class="menu-item active">
+                    👩‍🎓
+                    <span>Alunos</span>
+                </a>
+
+                <a href="/notas" class="menu-item">
+                    📝
+                    <span>Notas</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <main class="content">
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>
+                        Alunos 👩‍🎓
+                    </h1>
+
+                    <p>
+                        Gerencie os alunos cadastrados no sistema.
+                    </p>
+
+                </div>
+
+                <a
+                    href="/cadastrar"
+                    class="button"
+                >
+                    ➕ Novo aluno
+                </a>
+
+            </header>
+
+
+            <section class="section">
+
+                <div class="section-header">
+
+                    <h2>
+                        Lista de alunos
+                    </h2>
+
+                    <p id="student-count">
+                        {{ alunos | length }} aluno(s) cadastrado(s)
+                    </p>
+
+                </div>
+
+
+                <div class="search-form">
+
+                    <input
+                        type="text"
+                        id="student-search"
+                        placeholder="🔎 Buscar aluno pelo nome..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <div
+                    class="students-management"
+                    id="students-list"
+                >
+
+                    {% for aluno in alunos %}
+
+                        <div
+                            class="student-management-card"
+                            data-name="{{ aluno['nome'] | lower }}"
+                        >
+
+                            <div class="table-student">
+
+                                {% if aluno.get("foto") %}
+
+                                    <img
+                                        src="{{ url_for('static', filename='uploads/' + aluno['foto']) }}"
+                                        alt="Foto de {{ aluno['nome'] }}"
+                                        class="avatar-photo"
+                                    >
+
+                                {% else %}
+
+                                    <div class="avatar">
+                                        {{ aluno["nome"][0] | upper }}
+                                    </div>
+
+                                {% endif %}
+
+
+                                <div>
+
+                                    <strong>
+                                        {{ aluno["nome"] }}
+                                    </strong>
+
+                                    {% if aluno["notas"] %}
+
+                                        <span>
+                                            {{ aluno["notas"] | length }} nota(s) cadastrada(s)
+                                        </span>
+
+                                    {% else %}
+
+                                        <span>
+                                            Nenhuma nota cadastrada
+                                        </span>
+
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="management-actions">
+
+                                <a
+                                    href="/alunos/{{ aluno['nome'] }}"
+                                    class="details-button"
+                                >
+                                    👁️ Ver perfil
+                                </a>
+
+
+                                <a
+                                    href="/editar/{{ aluno['nome'] }}"
+                                    class="edit-button"
+                                >
+                                    ✏️ Editar
+                                </a>
+
+
+                                <form
+                                    method="POST"
+                                    action="/excluir/{{ aluno['nome'] }}"
+                                    onsubmit="return confirm('Tem certeza que deseja excluir este aluno?');"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="delete-button"
+                                    >
+                                        🗑️ Excluir
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+
+                    <div
+                        class="empty-state"
+                        id="no-results"
+                        style="display: none;"
+                    >
+
+                        <div>
+                            🔍
+                        </div>
+
+                        <h3>
+                            Nenhum aluno encontrado
+                        </h3>
+
+                        <p>
+                            Tente pesquisar por outro nome.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script>
+
+        const searchInput = document.getElementById("student-search");
+        const students = document.querySelectorAll(".student-management-card");
+        const noResults = document.getElementById("no-results");
+        const studentCount = document.getElementById("student-count");
+
+        searchInput.addEventListener("input", function () {
+
+            const search = searchInput.value
+                .toLowerCase()
+                .trim();
+
+            let visibleStudents = 0;
+
+            students.forEach(function (student) {
+
+                const name = student.dataset.name;
+
+                if (name.includes(search)) {
+
+                    student.style.display = "flex";
+                    visibleStudents++;
+
+                } else {
+
+                    student.style.display = "none";
+
+                }
+
+            });
+
+
+            if (visibleStudents === 0) {
+
+                noResults.style.display = "block";
+
+            } else {
+
+                noResults.style.display = "none";
+
+            }
+
+
+            if (search === "") {
+
+                studentCount.textContent =
+                    students.length + " aluno(s) cadastrado(s)";
+
+            } else {
+
+                studentCount.textContent =
+                    visibleStudents + " aluno(s) encontrado(s)";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

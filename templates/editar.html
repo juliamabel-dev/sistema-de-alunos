@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Editar aluno - Sistema de Alunos</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                🎓
+                <span>Sistema<br>de Alunos</span>
+            </div>
+
+            <nav>
+
+                <a href="/" class="menu-item">
+                    🏠
+                    <span>Início</span>
+                </a>
+
+                <a href="/alunos" class="menu-item active">
+                    👩‍🎓
+                    <span>Alunos</span>
+                </a>
+
+                <a href="/notas" class="menu-item">
+                    📝
+                    <span>Notas</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <main class="content">
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>
+                        Editar aluno ✏️
+                    </h1>
+
+                    <p>
+                        Atualize as informações do aluno.
+                    </p>
+
+                </div>
+
+            </header>
+
+            {% if mensagem %}
+
+                <div class="message">
+                    {{ mensagem }}
+                </div>
+
+            {% endif %}
+
+            <section class="section register-section">
+
+                <div class="register-icon">
+                    👩‍🎓
+                </div>
+
+                <div class="section-header">
+
+                    <h2>
+                        {{ aluno["nome"] }}
+                    </h2>
+
+                    <p>
+                        Edite os dados e a foto do aluno.
+                    </p>
+
+                </div>
+
+                <form
+                    method="POST"
+                    enctype="multipart/form-data"
+                    class="register-form"
+                >
+
+                    <div class="input-group">
+
+                        <label for="nome">
+                            Nome do aluno
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            value="{{ aluno['nome'] }}"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>
+                            Foto do aluno
+                        </label>
+
+                        {% if aluno.get("foto") %}
+
+                            <div class="current-photo">
+
+                                <img
+                                    src="{{ url_for('static', filename='uploads/' + aluno['foto']) }}"
+                                    alt="Foto de {{ aluno['nome'] }}"
+                                    class="photo-preview"
+                                >
+
+                                <div>
+
+                                    <p class="input-help">
+                                        Foto atual
+                                    </p>
+
+                                    <label class="remove-photo">
+
+                                        <input
+                                            type="checkbox"
+                                            name="remover_foto"
+                                            value="1"
+                                        >
+
+                                        Remover foto
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        {% else %}
+
+                            <p class="input-help">
+                                Este aluno ainda não possui uma foto.
+                            </p>
+
+                        {% endif %}
+
+                        <input
+                            type="file"
+                            id="foto"
+                            name="foto"
+                            accept=".png,.jpg,.jpeg,.webp"
+                        >
+
+                        <p class="input-help">
+                            {% if aluno.get("foto") %}
+                                Escolha uma nova foto para substituir a atual.
+                            {% else %}
+                                Adicione uma foto do aluno.
+                            {% endif %}
+                            Formatos: PNG, JPG, JPEG ou WEBP. Máximo: 4 MB.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="button"
+                    >
+                        💾 Salvar alterações
+                    </button>
+
+                </form>
+
+                <br>
+
+                <a
+                    href="/alunos/{{ aluno['nome'] }}"
+                    class="back-link"
+                >
+                    ← Voltar para o perfil
+                </a>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

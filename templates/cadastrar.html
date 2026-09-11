@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastrar aluno - Sistema de Alunos</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                🎓
+                <span>Sistema<br>de Alunos</span>
+            </div>
+
+            <nav>
+
+                <a href="/" class="menu-item">
+                    🏠
+                    <span>Início</span>
+                </a>
+
+                <a href="/alunos" class="menu-item">
+                    👩‍🎓
+                    <span>Alunos</span>
+                </a>
+
+                <a href="/notas" class="menu-item">
+                    📝
+                    <span>Notas</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <main class="content">
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>
+                        Cadastrar aluno 👩‍🎓
+                    </h1>
+
+                    <p>
+                        Adicione um novo aluno ao sistema.
+                    </p>
+
+                </div>
+
+            </header>
+
+
+            {% if mensagem %}
+
+                <div class="message">
+                    {{ mensagem }}
+                </div>
+
+            {% endif %}
+
+
+            <section class="section">
+
+                <div class="section-header">
+
+                    <h2>
+                        Informações do aluno
+                    </h2>
+
+                    <p>
+                        Preencha os dados abaixo para cadastrar um novo aluno.
+                    </p>
+
+                </div>
+
+
+                <form
+                    action="/cadastrar"
+                    method="POST"
+                    enctype="multipart/form-data"
+                >
+
+                    <div class="form-group">
+
+                        <label for="nome">
+                            Nome do aluno
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Digite o nome do aluno..."
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="foto">
+                            Foto do aluno
+                        </label>
+
+                        <input
+                            type="file"
+                            id="foto"
+                            name="foto"
+                            accept=".png,.jpg,.jpeg,.webp"
+                        >
+
+                        <span class="input-help">
+                            Opcional. PNG, JPG, JPEG ou WEBP, até 4 MB.
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <button
+                            type="submit"
+                            class="button"
+                        >
+                            ➕ Cadastrar aluno
+                        </button>
+
+                        <a
+                            href="/alunos"
+                            class="button secondary-button"
+                        >
+                            ← Cancelar
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

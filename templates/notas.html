@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notas - Sistema de Alunos</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                🎓
+                <span>Sistema<br>de Alunos</span>
+            </div>
+
+            <nav>
+
+                <a href="/" class="menu-item">
+                    🏠
+                    <span>Início</span>
+                </a>
+
+                <a href="/alunos" class="menu-item">
+                    👩‍🎓
+                    <span>Alunos</span>
+                </a>
+
+                <a href="/notas" class="menu-item active">
+                    📝
+                    <span>Notas</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <main class="content">
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>
+                        Notas 📝
+                    </h1>
+
+                    <p>
+                        Adicione notas e acompanhe o desempenho dos alunos.
+                    </p>
+
+                </div>
+
+            </header>
+
+            {% if mensagem %}
+
+                <div class="message">
+                    {{ mensagem }}
+                </div>
+
+            {% endif %}
+
+            <section class="section">
+
+                <div class="section-header">
+
+                    <h2>
+                        Adicionar nota
+                    </h2>
+
+                    <p>
+                        Registre uma nova nota para um aluno.
+                    </p>
+
+                </div>
+
+                <form
+                    method="POST"
+                    action="/adicionar-nota"
+                    class="grade-form"
+                >
+
+                    <div class="input-group">
+
+                        <label>
+                            Nome do aluno
+                        </label>
+
+                        <input
+                            type="text"
+                            name="nome"
+                            placeholder="Digite o nome do aluno..."
+                            required
+                        >
+
+                    </div>
+
+                    <div class="input-group grade-input">
+
+                        <label>
+                            Nota
+                        </label>
+
+                        <input
+                            type="number"
+                            name="nota"
+                            min="0"
+                            max="10"
+                            step="0.1"
+                            placeholder="0 a 10"
+                            required
+                        >
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="button"
+                    >
+                        ➕ Adicionar nota
+                    </button>
+
+                </form>
+
+            </section>
+
+            <section class="section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            Todos os alunos
+                        </h2>
+
+                        <p>
+                            Veja as notas e médias de cada aluno.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="grades-table">
+
+                    <div class="grades-table-header">
+
+                        <span>
+                            Aluno
+                        </span>
+
+                        <span>
+                            Notas
+                        </span>
+
+                        <span>
+                            Média
+                        </span>
+
+                        <span>
+                            Situação
+                        </span>
+
+                        <span>
+                            Ação
+                        </span>
+
+                    </div>
+
+                    {% for aluno in alunos %}
+
+                        <div class="grades-table-row">
+
+                            <div class="table-student">
+
+                                {% if aluno.get("foto") %}
+
+                                    <img
+                                        src="{{ url_for('static', filename='uploads/' + aluno['foto']) }}"
+                                        alt="Foto de {{ aluno['nome'] }}"
+                                        class="avatar-photo"
+                                    >
+
+                                {% else %}
+
+                                    <div class="avatar">
+                                        {{ aluno["nome"][0] | upper }}
+                                    </div>
+
+                                {% endif %}
+
+                                <strong>
+                                    {{ aluno["nome"] }}
+                                </strong>
+
+                            </div>
+
+                            <div class="table-notes">
+
+                                {% if aluno["notas"] %}
+                                    {{ aluno["notas"] | length }}
+                                {% else %}
+                                    0
+                                {% endif %}
+
+                            </div>
+
+                            <div class="table-average">
+
+                                {% if aluno["notas"] %}
+
+                                    {% set media = aluno["notas"] | sum / aluno["notas"] | length %}
+
+                                    {{ "%.1f"|format(media) }}
+
+                                {% else %}
+
+                                    —
+
+                                {% endif %}
+
+                            </div>
+
+                            <div class="table-status">
+
+                                {% if aluno["notas"] %}
+
+                                    {% if media >= 7 %}
+
+                                        <span class="approved">
+                                            Aprovado
+                                        </span>
+
+                                    {% elif media >= 5 %}
+
+                                        <span class="recovery">
+                                            Recuperação
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="failed">
+                                            Reprovado
+                                        </span>
+
+                                    {% endif %}
+
+                                {% else %}
+
+                                    <span class="no-grade">
+                                        Sem média
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                            <div class="table-action">
+
+                                <a
+                                    href="/alunos/{{ aluno['nome'] }}"
+                                    class="details-button"
+                                >
+                                    Ver notas →
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

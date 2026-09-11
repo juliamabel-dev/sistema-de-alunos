@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Editar nota - Sistema de Alunos</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                🎓
+                <span>Sistema<br>de Alunos</span>
+            </div>
+
+            <nav>
+
+                <a href="/" class="menu-item">
+                    🏠
+                    <span>Início</span>
+                </a>
+
+                <a href="/alunos" class="menu-item active">
+                    👩‍🎓
+                    <span>Alunos</span>
+                </a>
+
+                <a href="/notas" class="menu-item">
+                    📝
+                    <span>Notas</span>
+                </a>
+
+                <a href="/cadastrar" class="menu-item">
+                    ➕
+                    <span>Cadastrar</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <main class="content">
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>Editar nota ✏️</h1>
+
+                    <p>
+                        Altere a nota de {{ aluno["nome"] }}.
+                    </p>
+
+                </div>
+
+            </header>
+
+            {% if mensagem %}
+
+                <div class="message">
+                    {{ mensagem }}
+                </div>
+
+            {% endif %}
+
+            <section class="section">
+
+                <div class="section-header">
+
+                    <h2>
+                        Atualizar nota
+                    </h2>
+
+                    <p>
+                        Digite uma nova nota entre 0 e 10.
+                    </p>
+
+                </div>
+
+                <form method="POST" class="form">
+
+                    <div class="input-group">
+
+                        <label>
+                            Nota
+                        </label>
+
+                        <input
+                            type="number"
+                            name="nota"
+                            min="0"
+                            max="10"
+                            step="0.1"
+                            value="{{ nota }}"
+                            required
+                        >
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="button"
+                    >
+                        Salvar nota
+                    </button>
+
+                </form>
+
+            </section>
+
+            <a
+                href="/alunos/{{ aluno['nome'] }}"
+                class="button secondary-button"
+            >
+                ← Voltar para aluno
+            </a>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

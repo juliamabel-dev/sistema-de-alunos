@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Início - Sistema de Alunos</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                🎓
+                <span>Sistema<br>de Alunos</span>
+            </div>
+
+            <nav>
+
+                <a href="/" class="menu-item active">
+                    🏠
+                    <span>Início</span>
+                </a>
+
+                <a href="/alunos" class="menu-item">
+                    👩‍🎓
+                    <span>Alunos</span>
+                </a>
+
+                <a href="/notas" class="menu-item">
+                    📝
+                    <span>Notas</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <main class="content">
+
+            <header class="topbar dashboard-header">
+
+                <div>
+
+                    <h1>
+                        Olá! 👋📚
+                    </h1>
+
+                    <p>
+                        Bem-vinda ao seu painel de controle.
+                    </p>
+
+                </div>
+
+                <a
+                    href="/cadastrar"
+                    class="button"
+                >
+                    ➕ Novo aluno
+                </a>
+
+            </header>
+
+
+            <section class="dashboard-cards">
+
+                <div class="dashboard-card">
+
+                    <div class="dashboard-card-icon">
+                        👩‍🎓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total de alunos
+                        </span>
+
+                        <strong>
+                            {{ alunos | length }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <div class="dashboard-card-icon">
+                        📝
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total de notas
+                        </span>
+
+                        <strong>
+
+                            {% set total_notas = namespace(valor=0) %}
+
+                            {% for aluno in alunos %}
+                                {% set total_notas.valor = total_notas.valor + aluno["notas"] | length %}
+                            {% endfor %}
+
+                            {{ total_notas.valor }}
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <div class="dashboard-card-icon">
+                        🎉
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Aprovados
+                        </span>
+
+                        <strong>
+
+                            {% set aprovados = namespace(valor=0) %}
+
+                            {% for aluno in alunos %}
+
+                                {% if aluno["notas"] %}
+
+                                    {% set media = aluno["notas"] | sum / aluno["notas"] | length %}
+
+                                    {% if media >= 7 %}
+                                        {% set aprovados.valor = aprovados.valor + 1 %}
+                                    {% endif %}
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                            {{ aprovados.valor }}
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <div class="dashboard-card-icon">
+                        📚
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Em recuperação
+                        </span>
+
+                        <strong>
+
+                            {% set recuperacao = namespace(valor=0) %}
+
+                            {% for aluno in alunos %}
+
+                                {% if aluno["notas"] %}
+
+                                    {% set media = aluno["notas"] | sum / aluno["notas"] | length %}
+
+                                    {% if media >= 5 and media < 7 %}
+                                        {% set recuperacao.valor = recuperacao.valor + 1 %}
+                                    {% endif %}
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                            {{ recuperacao.valor }}
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-header dashboard-section-header">
+
+                    <div>
+
+                        <h2>
+                            Resumo dos alunos
+                        </h2>
+
+                        <p>
+                            Confira rapidamente o desempenho dos alunos.
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="/alunos"
+                        class="details-button"
+                    >
+                        Ver todos →
+                    </a>
+
+                </div>
+
+
+                <div class="student-list">
+
+                    {% if alunos %}
+
+                        {% for aluno in alunos[:5] %}
+
+                            <div class="student">
+
+                                <div class="student-info">
+
+                                    {% if aluno.get("foto") %}
+
+                                        <img
+                                            src="{{ url_for('static', filename='uploads/' + aluno['foto']) }}"
+                                            alt="Foto de {{ aluno['nome'] }}"
+                                            class="avatar-photo"
+                                        >
+
+                                    {% else %}
+
+                                        <div class="avatar">
+                                            {{ aluno["nome"][0] | upper }}
+                                        </div>
+
+                                    {% endif %}
+
+
+                                    <div>
+
+                                        <strong>
+                                            {{ aluno["nome"] }}
+                                        </strong>
+
+                                        {% if aluno["notas"] %}
+
+                                            <span>
+                                                {{ aluno["notas"] | length }} nota(s)
+                                            </span>
+
+                                        {% else %}
+
+                                            <span>
+                                                Sem notas
+                                            </span>
+
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="student-grade">
+
+                                    {% if aluno["notas"] %}
+
+                                        {% set media = aluno["notas"] | sum / aluno["notas"] | length %}
+
+                                        <strong>
+                                            {{ "%.1f"|format(media) }}
+                                        </strong>
+
+                                        <span>
+                                            Média
+                                        </span>
+
+                                    {% else %}
+
+                                        <strong>
+                                            —
+                                        </strong>
+
+                                        <span>
+                                            Média
+                                        </span>
+
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <div class="empty-state">
+
+                            <div>
+                                👩‍🎓
+                            </div>
+
+                            <h3>
+                                Nenhum aluno cadastrado
+                            </h3>
+
+                            <p>
+                                Comece cadastrando o primeiro aluno.
+                            </p>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </section>
+
+
+            <section class="quick-actions">
+
+                <a
+                    href="/alunos"
+                    class="quick-action"
+                >
+
+                    <div>
+                        👩‍🎓
+                    </div>
+
+                    <span>
+                        Gerenciar alunos
+                    </span>
+
+                    <small>
+                        Ver, editar e excluir alunos
+                    </small>
+
+                </a>
+
+
+                <a
+                    href="/notas"
+                    class="quick-action"
+                >
+
+                    <div>
+                        📝
+                    </div>
+
+                    <span>
+                        Gerenciar notas
+                    </span>
+
+                    <small>
+                        Adicionar e acompanhar notas
+                    </small>
+
+                </a>
+
+
+                <a
+                    href="/cadastrar"
+                    class="quick-action"
+                >
+
+                    <div>
+                        ➕
+                    </div>
+
+                    <span>
+                        Novo aluno
+                    </span>
+
+                    <small>
+                        Cadastrar um novo aluno
+                    </small>
+
+                </a>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

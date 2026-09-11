@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ aluno["nome"] }} - Sistema de Alunos</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                🎓
+                <span>Sistema<br>de Alunos</span>
+            </div>
+
+            <nav>
+
+                <a href="/" class="menu-item">
+                    🏠
+                    <span>Início</span>
+                </a>
+
+                <a href="/alunos" class="menu-item active">
+                    👩‍🎓
+                    <span>Alunos</span>
+                </a>
+
+                <a href="/notas" class="menu-item">
+                    📝
+                    <span>Notas</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <main class="content">
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>{{ aluno["nome"] }} 👩‍🎓</h1>
+
+                    <p>
+                        Informações e desempenho do aluno.
+                    </p>
+
+                </div>
+
+            </header>
+
+            <section class="section">
+
+                <div class="student-profile">
+
+                    {% if aluno.get("foto") %}
+
+                        <img
+                            src="{{ url_for('static', filename='uploads/' + aluno['foto']) }}"
+                            alt="Foto de {{ aluno['nome'] }}"
+                            class="big-photo"
+                        >
+
+                    {% else %}
+
+                        <div class="big-avatar">
+                            {{ aluno["nome"][0] | upper }}
+                        </div>
+
+                    {% endif %}
+
+                    <div>
+
+                        <h2>
+                            {{ aluno["nome"] }}
+                        </h2>
+
+                        <p>
+
+                            {% if aluno["notas"] %}
+
+                                {{ aluno["notas"] | length }} nota(s) cadastrada(s)
+
+                            {% else %}
+
+                                Nenhuma nota cadastrada
+
+                            {% endif %}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="section">
+
+                <div class="section-header">
+
+                    <h2>
+                        Notas 📝
+                    </h2>
+
+                    <p>
+                        Notas cadastradas para este aluno.
+                    </p>
+
+                </div>
+
+                {% if aluno["notas"] %}
+
+                    <div class="grades-list">
+
+                        {% for nota in aluno["notas"] %}
+
+                            <div class="grade-item">
+
+                                <div class="grade">
+                                    {{ "%.1f"|format(nota) }}
+                                </div>
+
+                                <div class="grade-actions">
+
+                                    <a
+                                        href="/editar-nota/{{ aluno['nome'] }}/{{ loop.index0 }}"
+                                        class="edit-button"
+                                    >
+                                        ✏️ Editar
+                                    </a>
+
+                                    <form
+                                        method="POST"
+                                        action="/excluir-nota/{{ aluno['nome'] }}/{{ loop.index0 }}"
+                                        onsubmit="return confirm('Tem certeza que deseja excluir esta nota?');"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="delete-button"
+                                        >
+                                            🗑️ Excluir
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    {% set media = aluno["notas"] | sum / aluno["notas"] | length %}
+
+                    <div class="average">
+
+                        <span>
+                            Média
+                        </span>
+
+                        <strong>
+                            {{ "%.1f"|format(media) }}
+                        </strong>
+
+                    </div>
+
+                    {% if media >= 7 %}
+
+                        <p class="approved">
+                            Aprovado 🎉
+                        </p>
+
+                    {% elif media >= 5 %}
+
+                        <p class="recovery">
+                            Recuperação 📚
+                        </p>
+
+                    {% else %}
+
+                        <p class="failed">
+                            Reprovado
+                        </p>
+
+                    {% endif %}
+
+                {% else %}
+
+                    <p>
+                        Esse aluno ainda não possui notas.
+                    </p>
+
+                {% endif %}
+
+            </section>
+
+            <div class="page-actions">
+
+                <a
+                    href="/editar/{{ aluno['nome'] }}"
+                    class="button"
+                >
+                    ✏️ Editar aluno
+                </a>
+
+                <form
+                    method="POST"
+                    action="/excluir/{{ aluno['nome'] }}"
+                    onsubmit="return confirm('Tem certeza que deseja excluir este aluno?');"
+                >
+
+                    <button
+                        type="submit"
+                        class="button delete-main-button"
+                    >
+                        🗑️ Excluir aluno
+                    </button>
+
+                </form>
+
+                <a
+                    href="/alunos"
+                    class="button secondary-button"
+                >
+                    ← Voltar para alunos
+                </a>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

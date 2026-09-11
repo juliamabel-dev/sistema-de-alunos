@@ -1,0 +1,93 @@
+[
+    {
+        "nome": "Alice Moreira",
+        "foto": "c97ead676a674b5895fb591a7e583bef.png",
+        "notas": [
+            9.0,
+            8.0
+        ]
+    },
+    {
+        "nome": "Ana Carla Souza",
+        "foto": null,
+        "notas": [
+            7.0,
+            7.0
+        ]
+    },
+    {
+        "nome": "Bárbara Rodrigues",
+        "foto": null,
+        "notas": [
+            10.0,
+            9.0,
+            10.0
+        ]
+    },
+    {
+        "nome": "José Roberto",
+        "notas": [
+            5.0,
+            3.0,
+            6.0
+        ],
+        "foto": "9787287652274b14b30b04bbeb3710b2.png"
+    },
+    {
+        "nome": "Julia Mabel",
+        "notas": [
+            3.0,
+            9.0
+        ],
+        "foto": "19280aa17f794b928bfaf5cec302ecf5.png"
+    },
+    {
+        "nome": "Larissa da Silva",
+        "notas": [
+            9.0,
+            5.0,
+            6.0
+        ],
+        "foto": "ed5cdb51638e469e8b68a922937ebcdf.png"
+    },
+    {
+        "nome": "Marcelo Beltramin",
+        "notas": [
+            10.0,
+            9.0,
+            10.0
+        ],
+        "foto": "3bef11d97d6f4c2aadd626a38a75a070.png"
+    },
+    {
+        "nome": "Maria Domingues",
+        "notas": [
+            7.0,
+            6.0,
+            9.0
+        ]
+    },
+    {
+        "nome": "Melissa Paola",
+        "notas": [
+            2.0,
+            5.0,
+            5.0
+        ]
+    },
+    {
+        "nome": "Pedro Santana",
+        "notas": [
+            5.0,
+            2.0
+        ]
+    },
+    {
+        "nome": "Victor Nunes",
+        "notas": [
+            8.0,
+            9.0
+        ],
+        "foto": "0dca8c76b7c2485b86650e59ab73d050.png"
+    }
+]

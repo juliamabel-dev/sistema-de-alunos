@@ -1,0 +1,1138 @@
+@import url("https://fonts.googleapis.com/css2?family=Griffy&display=swap");
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f5fb;
+    color: #292333;
+}
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    width: 250px;
+    background: #ffffff;
+    border-right: 1px solid #e9e4f1;
+    padding: 30px 18px;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #6d4bc3;
+    margin-bottom: 50px;
+    padding-left: 8px;
+}
+
+.logo span {
+    font-size: 17px;
+    line-height: 1.2;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #777181;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.menu-item:hover {
+    background: #f3effc;
+    color: #6d4bc3;
+}
+
+.menu-item.active {
+    background: #eee8fc;
+    color: #6d4bc3;
+    font-weight: bold;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 45px 60px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.topbar {
+    max-width: 1100px;
+    margin: 0 auto 30px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.topbar h1 {
+    font-family: "Griffy", system-ui;
+    font-size: 38px;
+    font-weight: 400;
+    font-style: normal;
+    margin-bottom: 8px;
+}
+
+.topbar p {
+    color: #817b8c;
+    font-size: 15px;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto 25px;
+    background: #ffffff;
+    border: 1px solid #e9e4f1;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 5px 18px rgba(55, 38, 89, 0.035);
+}
+
+.section-header {
+    margin-bottom: 22px;
+}
+
+.section-header h2 {
+    font-size: 21px;
+    margin-bottom: 6px;
+}
+
+.section-header p {
+    color: #817b8c;
+    font-size: 14px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.grade-form {
+    display: grid;
+    grid-template-columns: 1fr 220px auto;
+    align-items: end;
+    gap: 15px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    border: 1px solid #ddd7e8;
+    border-radius: 11px;
+    padding: 13px 14px;
+    font-size: 14px;
+    outline: none;
+    background: #ffffff;
+    transition: 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #8b6bd1;
+    box-shadow: 0 0 0 3px #eee8fc;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.button {
+    border: none;
+    border-radius: 11px;
+    padding: 13px 20px;
+    background: #6d4bc3;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+
+.button:hover {
+    background: #5b3eaa;
+}
+
+.secondary-button {
+    background: #eee8fc;
+    color: #6d4bc3;
+}
+
+.secondary-button:hover {
+    background: #e3daf8;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message {
+    max-width: 1044px;
+    margin: 0 auto 25px;
+    background: #eee8fc;
+    color: #6d4bc3;
+    padding: 14px 18px;
+    border-radius: 11px;
+    border: 1px solid #e2d8f7;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+/* =========================
+   GRADES TABLE
+========================= */
+
+.grades-table {
+    width: 100%;
+    border: 1px solid #eeeaf4;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.grades-table-header,
+.grades-table-row {
+    display: grid;
+    grid-template-columns: 2fr 0.8fr 0.9fr 1.3fr 1fr;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.grades-table-header {
+    min-height: 45px;
+    padding: 0 18px;
+    background: #f5f1fc;
+    color: #6f687d;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.grades-table-row {
+    min-height: 68px;
+    padding: 10px 18px;
+    border-top: 1px solid #eeeaf4;
+    transition: 0.2s;
+}
+
+.grades-table-row:hover {
+    background: #fcfbfe;
+}
+
+
+/* =========================
+   TABLE ALIGNMENT
+========================= */
+
+.grades-table-header span:nth-child(2),
+.grades-table-header span:nth-child(3),
+.grades-table-header span:nth-child(4),
+.grades-table-header span:nth-child(5) {
+    text-align: center;
+}
+
+.table-student {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #eee8fc;
+    color: #6d4bc3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.table-student strong {
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table-notes {
+    color: #6f687d;
+    font-size: 14px;
+    text-align: center;
+}
+
+.table-average {
+    color: #6d4bc3;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.table-status {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.table-action {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.approved {
+    color: #05c95d !important;
+}
+
+.recovery {
+    color: #e3b431 !important;
+}
+
+.failed {
+    color: #c21f1f !important;
+}
+
+.no-grade {
+    color: #817b8c;
+    font-weight: normal;
+}
+
+
+/* =========================
+   DETAILS
+========================= */
+
+.details-button {
+    display: inline-block;
+    text-decoration: none;
+    color: #6d4bc3;
+    background: #eee8fc;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 9px 12px;
+    border-radius: 9px;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+
+.details-button:hover {
+    background: #e3daf8;
+}
+
+
+/* =========================
+   STUDENT ACTIONS
+========================= */
+
+.student-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+.student-actions form {
+    margin: 0;
+}
+
+.edit-button,
+.delete-button {
+    border: none;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 9px 11px;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+
+.edit-button {
+    display: inline-block;
+    color: #4d7ab8;
+    background: #edf4fc;
+}
+
+.edit-button:hover {
+    background: #dfeefa;
+}
+
+.delete-button {
+    color: #c21f1f;
+    background: #fceeee;
+}
+
+.delete-button:hover {
+    background: #f9dede;
+}
+
+
+/* =========================
+   STUDENT PROFILE
+========================= */
+
+.student-profile {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.big-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #eee8fc;
+    color: #6d4bc3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 29px;
+    font-weight: bold;
+}
+
+.student-profile h2 {
+    margin-bottom: 5px;
+}
+
+.student-profile p {
+    color: #817b8c;
+}
+
+
+/* =========================
+   GRADES
+========================= */
+
+.grades {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.grade {
+    width: 70px;
+    height: 70px;
+    border-radius: 14px;
+    background: #eee8fc;
+    color: #6d4bc3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.grades-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.grade-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px;
+
+    border: 1px solid #eeeaf4;
+    border-radius: 13px;
+}
+
+.grade-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.grade-actions form {
+    margin: 0;
+}
+
+
+/* =========================
+   AVERAGE
+========================= */
+
+.average {
+    margin-top: 25px;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.average span {
+    color: #817b8c;
+}
+
+.average strong {
+    font-size: 28px;
+    color: #6d4bc3;
+}
+
+
+/* =========================
+   PAGE ACTIONS
+========================= */
+
+.page-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.delete-main-button {
+    background: #c21f1f;
+}
+
+.delete-main-button:hover {
+    background: #a71919;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.search-form input {
+    flex: 1;
+    border: 1px solid #ddd7e8;
+    border-radius: 11px;
+    padding: 13px 15px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.search-form input:focus {
+    border-color: #8b6bd1;
+    box-shadow: 0 0 0 3px #eee8fc;
+}
+
+.clear-search {
+    text-decoration: none;
+    color: #817b8c;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.clear-search:hover {
+    color: #6d4bc3;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+    text-align: center;
+    padding: 45px 20px;
+    color: #817b8c;
+}
+
+.empty-state > div {
+    font-size: 35px;
+    margin-bottom: 12px;
+}
+
+.empty-state h3 {
+    color: #292333;
+    margin-bottom: 6px;
+}
+
+.empty-state p {
+    font-size: 14px;
+}
+
+
+/* =========================
+   CADASTRAR
+========================= */
+
+.register-section {
+    max-width: 700px;
+}
+
+.register-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: #eee8fc;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+    margin-bottom: 22px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.register-form .button {
+    align-self: flex-start;
+}
+
+.back-link {
+    display: inline-block;
+    color: #6d4bc3;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    margin-left: 3px;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   STUDENT MANAGEMENT
+========================= */
+
+.students-management {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.student-management-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+    padding: 16px 18px;
+
+    border: 1px solid #eeeaf4;
+    border-radius: 14px;
+
+    transition: 0.2s;
+}
+
+.student-management-card:hover {
+    background: #fcfbfe;
+    border-color: #ddd3ef;
+}
+
+.student-management-card .table-student {
+    flex: 1;
+}
+
+.student-management-card .table-student > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.student-management-card .table-student span {
+    color: #817b8c;
+    font-size: 12px;
+}
+
+.management-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.management-actions form {
+    margin: 0;
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard-header {
+    margin-bottom: 30px;
+}
+
+.dashboard-cards {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto 25px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.dashboard-card {
+    background: #ffffff;
+    border: 1px solid #e9e4f1;
+    border-radius: 18px;
+
+    padding: 22px;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    box-shadow: 0 5px 18px rgba(55, 38, 89, 0.035);
+}
+
+.dashboard-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+
+    background: #eee8fc;
+    color: #6d4bc3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.dashboard-card span {
+    display: block;
+    color: #817b8c;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.dashboard-card strong {
+    display: block;
+    color: #292333;
+    font-size: 25px;
+}
+
+
+/* =========================
+   DASHBOARD SECTION
+========================= */
+
+.dashboard-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+
+/* =========================
+   DASHBOARD - ALUNOS
+========================= */
+
+.student-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.student {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px 18px;
+
+    border: 1px solid #eeeaf4;
+    border-radius: 14px;
+
+    transition: 0.2s;
+}
+
+.student:hover {
+    background: #fcfbfe;
+    border-color: #ddd3ef;
+}
+
+.student-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.student-info > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.student-info strong {
+    font-size: 14px;
+}
+
+.student-info span {
+    color: #817b8c;
+    font-size: 12px;
+}
+
+.student-grade {
+    min-width: 70px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    padding-left: 20px;
+    border-left: 1px solid #e9e4f1;
+}
+
+.student-grade strong {
+    color: #6d4bc3;
+    font-size: 20px;
+}
+
+.student-grade span {
+    color: #817b8c;
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+.quick-actions {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto 25px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.quick-action {
+    background: #ffffff;
+    border: 1px solid #e9e4f1;
+    border-radius: 18px;
+
+    padding: 22px;
+
+    text-decoration: none;
+    color: #292333;
+
+    transition: 0.2s;
+}
+
+.quick-action:hover {
+    border-color: #d8ccec;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(55, 38, 89, 0.06);
+}
+
+.quick-action > div {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 13px;
+    background: #eee8fc;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.quick-action span {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.quick-action small {
+    color: #817b8c;
+    font-size: 12px;
+}
+
+
+/* =========================
+   PHOTOS
+========================= */
+
+.avatar-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid #eee8fc;
+}
+
+.big-photo {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 3px solid #eee8fc;
+}
+
+.input-help {
+    color: #817b8c;
+    font-size: 12px;
+    margin-top: -2px;
+}
+
+.current-photo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.photo-preview {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #eee8fc;
+}
+
+.remove-photo {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #817b8c;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.remove-photo input {
+    accent-color: #6d4bc3;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .content {
+        padding: 35px;
+    }
+
+    .grade-form {
+        grid-template-columns: 1fr 180px;
+    }
+
+    .grade-form .button {
+        grid-column: 1 / -1;
+        justify-self: start;
+    }
+
+    .grades-table-header,
+    .grades-table-row {
+        grid-template-columns: 1.8fr 0.7fr 0.8fr 1.1fr 0.9fr;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .content {
+        margin-left: 210px;
+        width: calc(100% - 210px);
+        padding: 30px 20px;
+    }
+
+    .grades-table-header,
+    .grades-table-row {
+        grid-template-columns: 1.5fr 0.6fr 0.7fr 1fr 0.8fr;
+        column-gap: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .table-student {
+        gap: 7px;
+    }
+
+    .table-student strong {
+        font-size: 13px;
+    }
+
+    .table-notes {
+        font-size: 13px;
+    }
+
+    .table-average {
+        font-size: 15px;
+    }
+
+    .table-status {
+        font-size: 11px;
+    }
+
+    .details-button {
+        font-size: 11px;
+        padding: 8px 9px;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .topbar {
+        flex-direction: column;
+    }
+
+    .student-management-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .management-actions {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    .content {
+        margin-left: 0;
+        width: 100%;
+        padding: 25px 15px;
+    }
+
+    .grade-form {
+        grid-template-columns: 1fr;
+    }
+
+    .grade-form .button {
+        grid-column: auto;
+        width: 100%;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .student {
+        gap: 15px;
+    }
+
+    .student-grade {
+        min-width: 60px;
+    }
+
+}
